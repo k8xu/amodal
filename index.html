@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Code head -->
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Amodal Completion via Progressive Mixed Context Diffusion">
+  <meta name="keywords" content="Amodal Completion, Diffusion Model, Image Inpainting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amodal Completion via Progressive Mixed Context Diffusion</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/amodal_icon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+
+
+<!-- Code body -->
+<body>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- Title and authors -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+            <h1 class="title is-3 publication-title">Amodal Completion via Progressive Mixed Context Diffusion</h1>
+            <div class="is-size-5 publication-authors">
+            <span class="author-block">
+                <a href="https://k8xu.github.io">Katherine Xu</a><sup>1</sup>,</span>
+            <span class="author-block">
+                <a href="https://owenzlz.github.io">Lingzhi Zhang</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.cis.upenn.edu/~jshi">Jianbo Shi</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup> University of Pennsylvania</span>&nbsp
+            <span class="author-block"><sup>2</sup>Adobe</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+
+                <!-- PDF -->
+                <span class="link-block">
+                <a href="https://arxiv.org/pdf/2312.15540.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <!-- Code -->
+              <span class="link-block">
+                <a href="https://github.com/k8xu/amodal"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Teaser figure -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.png" alt="teaser"/>
+      <h2 class="content has-text-centered">
+            Our method can recover the hidden pixels of objects in diverse images. Occluders may be <strong>co-occurring</strong> (a person on a surfboard),
+            <strong>accidental</strong> (a cat in front of a microwave), the <strong>image boundary</strong> (giraffe), or a combination of these scenarios.
+            <br>The pink outline indicates an occluder object.
+      </h2>
+    </div>
+
+    <p style="text-align: center;">
+      Skip to:  &nbsp;&nbsp;
+      <a href="#abstract">[Abstract]</a> &nbsp;
+      <a href="#pipeline">[Progressive Occlusion-aware Completion]</a> &nbsp;
+      <a href="#mixedcontext">[Mixed Context Diffusion Sampling]</a> &nbsp;
+      <a href="#results">[Results]</a> &nbsp;
+      <a href="#BibTeX">[Cite]</a> &nbsp;
+    </p>
+  </div>
+</section>
+
+
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Our brain can effortlessly recognize objects even when partially hidden from view. Seeing the visible of the hidden is called
+            amodal completion; however, this task remains a challenge for generative AI despite rapid progress. We propose to sidestep
+            many of the difficulties of existing approaches, which typically involve a two-step process of predicting amodal masks and
+            then generating pixels. Our method involves thinking outside the box, literally! We go outside the object bounding box to use
+            its context to guide a pre-trained diffusion inpainting model, and then progressively grow the occluded object and trim the
+            extra background. We overcome two technical challenges: 1) how to be free of unwanted co-occurrence bias, which tends to
+            regenerate similar occluders, and 2) how to judge if an amodal completion has succeeded. Our amodal completion method
+            exhibits improved photorealistic completion results compared to existing approaches in numerous successful completion cases.
+            And the best part? It doesn't require any special training or fine-tuning of models.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<!-- Pipeline section -->
+<section class="section" id="pipeline">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Progressive Occlusion-aware Completion</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/method_pipeline.png" alt="pipeline"/>
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Mixed Context section -->
+<section class="section" id="mixedcontext">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Mixed Context Diffusion Sampling</h2>
+          <div class="content has-text-justified">
+            <img src="./static/images/method_mixed_context.png" alt="mixed context"/>
+            <p>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Results section -->
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results</h2>
+          <div class="content has-text-justified">
+
+            <h3 class="title is-4">Amodal Completions</h3>
+            <div style="text-align:center">
+                <img src="./static/images/results_completions.png" alt="completions" width=700/>
+                <p>
+                    Our method completes objects within and beyond the image boundary.<br>
+                </p>
+            </div>
+
+            <h3 class="title is-4">Comparisons with Prior Works</h3>
+            <div style="text-align:center">
+              <img src="./static/images/results_comparisons.png" alt="comparisons" width=700/>
+                <p>
+                    Comparisons of our method with prior works on natural images.<br>
+                </p>
+            </div>
+
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{xu2023amodal,
+        title={Amodal Completion via Progressive Mixed Context Diffusion}, 
+        author={Katherine Xu and Lingzhi Zhang and Jianbo Shi},
+        year={2023},
+        eprint={2312.15540},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV}
+    }</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<button type="button" onclick="topFunction()" id="myBtn" title="Go to top">Top</button> 
+
+</body>
+</html>
