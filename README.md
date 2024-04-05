@@ -16,12 +16,10 @@ The pink outline indicates an occluder object.
 
 If you find our work useful, please cite our paper:
 ```
-@misc{xu2023amodal,
-        title={Amodal Completion via Progressive Mixed Context Diffusion},
-        author={Katherine Xu and Lingzhi Zhang and Jianbo Shi},
-        year={2023},
-        eprint={2312.15540},
-        archivePrefix={arXiv},
-        primaryClass={cs.CV}
-    }
+@article{xu2023amodal,
+    title={Amodal Completion via Progressive Mixed Context Diffusion},
+    author={Xu, Katherine and Zhang, Lingzhi and Shi, Jianbo},
+    journal={arXiv:2312.15540},
+    year={2023}
+}
 ```
