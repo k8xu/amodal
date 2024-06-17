@@ -1,0 +1,63 @@
+model:
+    algo: OrderNet
+    total_iter: 32000
+    lr_steps: []
+    lr_mults: []
+    lr: 0.001
+    weight_decay: 0.0001
+    optim: SGD
+    warmup_lr: []
+    warmup_steps: []
+    use_rgb: True
+    backbone_arch: resnet50_cls
+    backbone_param:
+        in_channels: 5
+        num_classes: 3
+    inmask_weight: 5.
+data:
+    data_mean: [0.485, 0.456, 0.406]
+    data_std: [0.229, 0.224, 0.225]
+    base_dir: "/"
+    use_category: False
+    remove_occ_bidirec: 0
+    extend_bidirec: 0
+
+    dataset: "KINS"
+    memcached: False
+    memcached_client: "/mnt/lustre/share/memcached_client"
+    trainval_dataset: 'SupOcclusionOrderDataset'
+    train_image_root: "/data/KINS/training/image_2"
+    train_annot_file: "/data/KINS/instances_train.json"
+    val_image_root: "/data/KINS/testing/image_2"
+    val_annot_file: "/data/KINS/instances_val.json"
+
+    input_size: 256
+    enlarge_box: 3.
+    eraser_front_prob: 0.8 # case 1 probability
+    eraser_setter:
+        min_overlap: 0.4
+        max_overlap: 1.0
+        min_cut_ratio: 0.001
+        max_cut_ratio: 0.9
+    base_aug:
+        flip: True
+        shift: [-0.2, 0.2]
+        scale: [0.8, 1.2]
+    load_rgb: True
+    batch_size: 32
+    batch_size_val: 32
+    workers: 8
+    patch_or_image: "patch"
+
+trainer:
+    initial_val: True
+    val_freq: 2000
+    val_iter: 10
+    val_disp_start_iter: 0
+    val_disp_end_iter: 1
+    print_freq: 100
+    save_freq: 2000
+    loss_record: ['loss']
+    tensorboard: True
+    wandb: True
+    exp_name: "OrderNet"

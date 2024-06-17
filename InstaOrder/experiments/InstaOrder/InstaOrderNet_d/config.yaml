@@ -1,0 +1,59 @@
+model:
+    algo: InstaOrderNet_d
+    total_iter: 60000
+    lr_steps: [32000, 48000]
+    lr_mults: [0.1, 0.1]
+    lr: 0.0001
+    weight_decay: 0.0001
+    optim: SGD
+    warmup_lr: []
+    warmup_steps: []
+
+    overlap_weight: 0.1
+    distinct_weight: 0.9
+
+    backbone_arch: resnet50_cls
+    backbone_param:
+        in_channels: 5
+        num_classes: 3
+    use_rgb: True
+
+data:
+    use_category: False
+    data_mean: [0.485, 0.456, 0.406]
+    data_std: [0.229, 0.224, 0.225]
+    base_dir: "/"
+    use_category: False
+    remove_depth_overlap: 0
+
+    dataset: "InstaOrder"
+    memcached: False
+    memcached_client: "/mnt/lustre/share/memcached_client"
+    trainval_dataset: 'SupDepthOrderDataset'
+    train_image_root: "/data/COCO/train2017"
+    train_annot_file: "/data/COCO/annotations/InstaOrder_train2017.json"
+    val_image_root: "/data/COCO/val2017"
+    val_annot_file: "/data/COCO/annotations/InstaOrder_val2017.json"
+
+    input_size: 384
+    enlarge_box: 3.
+    base_aug:
+        flip: True
+        shift: [-0.2, 0.2] 
+        scale: [0.8, 1.2]
+    load_rgb: True
+    batch_size: 32
+    batch_size_val: 32
+    workers: 4
+    patch_or_image: "resize"
+
+trainer:
+    initial_val: False
+    val_freq: 2000
+    val_iter: 10
+    print_freq: 100
+    save_freq: 2000
+    loss_record: ['loss']
+    wandb: True
+    exp_name: "InstaOrderNet_d"
+        
